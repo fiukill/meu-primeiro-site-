@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gerador de Legendas para Afiliados</title>
+<style>
+:root{--bg:#f6f4fb;--card:#fff;--tx:#1d1730;--mut:#6b6580;--bd:#ddd8ea;--pri:#6d28d9;--pri-tx:#fff;--acc:#a3e635;--acc-tx:#1a2e05;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#130f1f;--card:#1d1730;--tx:#f1eefb;--mut:#a39cbc;--bd:#352d52;--pri:#8b5cf6;--pri-tx:#fff;--acc:#a3e635;--acc-tx:#1a2e05}}
+:root[data-theme="dark"]{--bg:#130f1f;--card:#1d1730;--tx:#f1eefb;--mut:#a39cbc;--bd:#352d52;--pri:#8b5cf6;--pri-tx:#fff;--acc:#a3e635;--acc-tx:#1a2e05}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.4rem;margin:8px 0 2px}
+.sub{color:var(--mut);margin:0 0 16px;font-size:.92rem}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.full{grid-column:1/-1}
+label{display:block;font-size:.82rem;font-weight:600;margin-bottom:4px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);outline-offset:1px}
+.chk{display:flex;gap:8px;align-items:center;font-weight:500}
+.chk input{width:auto}
+button{font:inherit;cursor:pointer;border-radius:10px;border:0;padding:12px 16px;font-weight:700}
+.go{background:var(--pri);color:var(--pri-tx);width:100%;font-size:1rem}
+.sec{background:transparent;color:var(--tx);border:1px solid var(--bd);padding:8px 12px;font-weight:600;font-size:.85rem}
+.cp{background:var(--acc);color:var(--acc-tx);padding:8px 12px;font-size:.85rem}
+#out{margin-top:16px;display:grid;gap:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.badge{font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--pri);color:var(--pri-tx)}
+.badge.meio{background:#0e7490}.badge.fundo{background:#b45309}
+textarea.cap{min-height:180px;resize:vertical;line-height:1.45}
+.row{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
+.cnt{margin-left:auto;font-size:.78rem;color:var(--mut)}
+.err{color:#dc2626;font-size:.85rem;margin-top:8px;min-height:1.2em}
+.hint{font-size:.78rem;color:var(--mut);margin-top:4px}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<h1>🛒 Gerador de Legendas para Afiliados</h1>
+<p class="sub">Legendas com gancho de compra, estrutura de funil de vendas e hashtags ligadas ao produto.</p>
+
+<section class="panel">
+<div class="grid">
+<div class="full"><label for="produto">Nome do produto *</label>
+<input id="produto" placeholder="Ex.: Fone Bluetooth Lenovo LP40 Pro" autocomplete="off"></div>
+
+<div><label for="cat">Categoria</label>
+<select id="cat"></select></div>
+
+<div><label for="loja">Plataforma de afiliado</label>
+<select id="loja"><option value="shopee">Shopee</option><option value="ml">Mercado Livre</option></select></div>
+
+<div class="full"><label for="benef">Principal benefício</label>
+<input id="benef" placeholder="Ex.: bateria de 40 horas e som com graves fortes" autocomplete="off"></div>
+
+<div><label for="preco">Preço atual (R$)</label>
+<input id="preco" inputmode="decimal" placeholder="Ex.: 59,90"></div>
+<div><label for="de">Preço antigo (R$), opcional</label>
+<input id="de" inputmode="decimal" placeholder="Ex.: 99,90"></div>
+
+<div><label for="funil">Etapa do funil</label>
+<select id="funil">
+<option value="todos">Todas (topo, meio e fundo)</option>
+<option value="topo">Topo: atrair atenção</option>
+<option value="meio">Meio: gerar desejo e prova</option>
+<option value="fundo">Fundo: fechar a compra</option>
+</select></div>
+
+<div><label for="rede">Rede social</label>
+<select id="rede"><option value="tiktok">TikTok</option><option value="kwai">Kwai</option><option value="reels">Instagram Reels</option></select></div>
+
+<div><label for="cta">Chamada para ação (CTA)</label>
+<select id="cta">
+<option>👉 Link na bio</option>
+<option>👉 Link no meu perfil</option>
+<option>💬 Comenta EU QUERO que eu te mando o link</option>
+<option>📩 Chama no direct pra receber o link</option>
+</select></div>
+
+<div><label for="qtd">Quantidade de legendas</label>
+<select id="qtd"><option>3</option><option selected>6</option><option>9</option></select></div>
+
+<div><label for="ntags">Hashtags por legenda</label>
+<select id="ntags"><option>8</option><option selected>12</option><option>15</option></select></div>
+
+<div class="chk"><input type="checkbox" id="publi" checked><label for="publi" style="margin:0">Incluir aviso de publi (#publi e link de afiliado)</label></div>
+</div>
+<div class="err" id="err" role="alert"></div>
+<button class="go" id="gerar">✨ Gerar legendas</button>
+<p class="hint">Dica: preencha preço atual e antigo para gerar legendas de fundo de funil com desconto calculado.</p>
+</section>
+
+<section id="out" aria-live="polite"></section>
+</main>
+
+<script>
+const CATS=[
+{l:"Fones e áudio",s:"fone de ouvido",t:["fonebluetooth","fonesemfio","audio","headphone"]},
+{l:"Celular e acessórios",s:"acessório de celular",t:["smartphone","acessoriosparacelular","celular","android"]},
+{l:"Smartwatch e wearables",s:"smartwatch",t:["smartwatch","relogiointeligente","wearable"]},
+{l:"Carregadores e cabos",s:"carregador",t:["carregadorrapido","powerbank","cabousb"]},
+{l:"Informática e periféricos",s:"item de informática",t:["informatica","setup","notebook","teclado"]},
+{l:"Casa inteligente",s:"item de casa inteligente",t:["casainteligente","smarthome","automacao"]},
+{l:"Gamer",s:"item gamer",t:["gamer","setupgamer","gaming"]},
+{l:"Câmeras e streaming",s:"câmera",t:["camera","streaming","criadordeconteudo"]},
+{l:"Outros gadgets",s:"gadget",t:["gadgets","tecnologia","novidadetech"]}];
+
+const LOJAS={shopee:{n:"Shopee",t:["shopee","shopeeachados","achadinhosshopee","shopeebrasil"]},
+ml:{n:"Mercado Livre",t:["mercadolivre","mercadolivreachados","mercadolivrebrasil"]}};
+const REDES={tiktok:["tiktokmefezcomprar","fyp","tiktokbrasil"],kwai:["kwai","kwaibrasil","kwaiviral"],reels:["reels","reelsbrasil","instagramreels"]};
+const COMPRA=["achadinhos","promocao","oferta","cupom","comprasonline","melhorpreco","custobeneficio","desconto","compreagora"];
+const FUNIL_T={topo:["dicadetech","tecnologia","voceprecisaver","achados"],
+meio:["reviewtech","custobeneficio","vale a pena".replace(/ /g,""),"comparativo","resenha"],
+fundo:["promododia","ofertaimperdivel","ultimasunidades","aproveite","corre"]};
+
+const T={
+topo:[
+"🚨 Achei {produto} e quase não acreditei: {benef}.\n\nSe você curte {cat}, salva esse vídeo pra não perder.\n\n{cta}",
+"Ninguém te conta isso sobre {cat}... 👀\n{produto} entrega {benef} {precoF}.\n\nMarca alguém que precisa ver isso!\n\n{cta}",
+"Pare de gastar à toa com {cat}! 🛑\n{produto}: {benef}.\nDescobri {precoF} na {loja}.\n\n{cta}",
+"POV: você descobre que existe {produto} {precoF} 😳\n{benef}.\n\nSegue pra ver mais achados de tech.\n\n{cta}",
+"Tecnologia boa não precisa ser cara 💡\n{produto} → {benef}.\n\nSalva e compartilha com quem vive pedindo indicação.\n\n{cta}"],
+meio:[
+"✅ Por que {produto} está chamando tanta atenção?\n\n• {benef}\n• Entrega muito pelo que custa ({precoF})\n• Dá pra conferir as avaliações de quem já comprou na {loja}\n\nAntes de comprar qualquer {cat}, olha esse.\n\n{cta}",
+"Resumo rápido do {produto} 🔥\n{benef}.\nCusto-benefício que chama atenção {precoF}.\n\nQuer a análise completa? Comenta “REVIEW”.\n\n{cta}",
+"{produto} vale a pena? Se você quer {benef}, vale a pena olhar. 👇\nConfere as notas e comentários de quem já comprou na {loja}.\n\n{cta}",
+"Comparando opções de {cat}, {produto} se destaca por unir {benef} com preço justo {precoF}. ⚖️\n\n{cta}",
+"3 motivos pra você querer {produto}:\n1️⃣ {benef}\n2️⃣ Preço que cabe no bolso\n3️⃣ Compra direto pela {loja}, com a proteção da plataforma\n\n{cta}"],
+fundo:[
+"⏰ CONFERE AGORA: {produto} {descF}!\n{benef}.\n\nOferta por tempo limitado e o preço pode mudar a qualquer momento na {loja}. Garanta o seu 👇\n\n{cta}",
+"🔥 Achadinho da {loja}: {produto} {descF}.\n{benef}.\n\nEstoque e preço variam, então não deixa pra depois.\n\n{cta}",
+"Quer comprar {produto}? Esse é o momento. 🛒\n{descF}\n✔ {benef}\n✔ Compra pela {loja}\n\n{cta}",
+"Se você estava esperando uma promoção de {cat}, ela chegou. 💥\n{produto} {descF}.\n\nCorre antes que o preço mude!\n\n{cta}",
+"PROMO ON 🚨 {produto} {descF}.\n{benef}.\n\nToca no link e finaliza sua compra na {loja}.\n\n{cta}"]
+};
+const LABEL={topo:"Topo · Atenção",meio:"Meio · Desejo e prova",fundo:"Fundo · Decisão de compra"};
+
+const $=id=>document.getElementById(id);
+const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const num=v=>{const n=parseFloat(String(v).replace(/\./g,"").replace(",","."));return isNaN(n)||n<=0?null:n};
+const brl=n=>n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+CATS.forEach((c,i)=>{const o=document.createElement("option");o.value=i;o.textContent=c.l;$("cat").appendChild(o)});
+
+function productTags(nome){
+  const stop=new Set(["para","com","sem","das","dos","uma","uns","the","kit"]);
+  const w=norm(nome).replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(x=>x.length>2&&!stop.has(x));
+  const out=[];
+  const full=w.slice(0,3).join("");
+  if(full.length>=4)out.push(full);
+  w.slice(0,4).forEach(x=>{if(x.length>3)out.push(x)});
+  return out;
+}
+
+function buildTags(d,stage){
+  const groups=[
+    productTags(d.produto),
+    d.cat.t,
+    shuffle(FUNIL_T[stage]).slice(0,2),
+    LOJAS[d.loja].t.slice(0,2),
+    shuffle(COMPRA).slice(0,3),
+    REDES[d.rede].slice(0,2)
+  ];
+  const seen=new Set(),list=[];
+  // intercala por prioridade: produto e categoria primeiro
+  const max=Math.max(...groups.map(g=>g.length));
+  for(let i=0;i<max;i++)groups.forEach(g=>{
+    if(g[i]&&!seen.has(g[i])){seen.add(g[i]);list.push("#"+g[i])}
+  });
+  const limit=d.ntags-(d.publi?1:0);
+  const res=list.slice(0,limit);
+  if(d.publi)res.push("#publi");
+  return res.join(" ");
+}
+
+function fill(tpl,v){return tpl.replace(/\{(\w+)\}/g,(m,k)=>v[k]!==undefined?v[k]:m)}
+
+function read(){
+  return{produto:$("produto").value.trim(),cat:CATS[+$("cat").value],loja:$("loja").value,
+    benef:$("benef").value.trim(),preco:num($("preco").value),de:num($("de").value),
+    funil:$("funil").value,rede:$("rede").value,cta:$("cta").value,
+    qtd:+$("qtd").value,ntags:+$("ntags").value,publi:$("publi").checked};
+}
+
+function vars(d){
+  let precoF="com ótimo custo-benefício",descF="em oferta";
+  if(d.preco){
+    precoF="por R$ "+brl(d.preco);
+    descF=precoF;
+    if(d.de&&d.de>d.preco){
+      const pct=Math.round((1-d.preco/d.de)*100);
+      descF="de R$ "+brl(d.de)+" por R$ "+brl(d.preco)+" ("+pct+"% OFF)";
+    }
+  }
+  return{produto:d.produto,cat:d.cat.s,loja:LOJAS[d.loja].n,
+    benef:d.benef||"desempenho acima do esperado",precoF,descF,cta:d.cta};
+}
+
+function gerar(){
+  const d=read();
+  if(!d.produto){$("err").textContent="Digite o nome do produto para gerar as legendas.";$("produto").focus();return}
+  $("err").textContent="";
+  const v=vars(d);
+  const stages=d.funil==="todos"?["topo","meio","fundo"]:[d.funil];
+  const decks={};
+  const out=$("out");out.innerHTML="";
+  for(let i=0;i<d.qtd;i++){
+    const st=stages[i%stages.length];
+    if(!decks[st]||!decks[st].length)decks[st]=shuffle(T[st].map((_,k)=>k));
+    const tpl=T[st][decks[st].pop()];
+    let txt=fill(tpl,v);
+    if(d.publi)txt+="\n\n📢 Publi: link de afiliado.";
+    txt+="\n\n"+buildTags(d,st);
+    out.appendChild(card(st,txt,i+1));
+  }
+  out.firstChild&&out.firstChild.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function card(st,txt,n){
+  const c=document.createElement("article");c.className="card";
+  const top=document.createElement("div");top.className="top";
+  const b=document.createElement("span");b.className="badge "+st;b.textContent="#"+n+" · "+LABEL[st];
+  top.appendChild(b);c.appendChild(top);
+  const ta=document.createElement("textarea");ta.className="cap";ta.value=txt;ta.setAttribute("aria-label","Legenda "+n);
+  c.appendChild(ta);
+  const row=document.createElement("div");row.className="row";
+  const cp=document.createElement("button");cp.className="cp";cp.textContent="📋 Copiar tudo";
+  cp.onclick=()=>copiar(ta.value,cp);
+  const cnt=document.createElement("span");cnt.className="cnt";
+  const upd=()=>{cnt.textContent=ta.value.length+" caracteres"};
+  ta.addEventListener("input",upd);upd();
+  row.append(cp,cnt);c.appendChild(row);
+  return c;
+}
+
+async function copiar(t,btn){
+  const old=btn.textContent;
+  try{await navigator.clipboard.writeText(t)}
+  catch(e){
+    const x=document.createElement("textarea");x.value=t;x.style.position="fixed";x.style.opacity="0";
+    document.body.appendChild(x);x.select();
+    try{document.execCommand("copy")}catch(_){}
+    document.body.removeChild(x);
+  }
+  btn.textContent="✅ Copiado!";setTimeout(()=>{btn.textContent=old},1500);
+}
+
+$("gerar").addEventListener("click",gerar);
+$("produto").addEventListener("keydown",e=>{if(e.key==="Enter")gerar()});
+</script>
+</body>
+</html>
